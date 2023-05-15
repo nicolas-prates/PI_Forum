@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'MedievalSharp';
+  src: url(./MedievalSharp-Regular.ttf) format('truetype');
+}
+
+body {
+    background-image: url(./imagens/new-world-wallpaper1.jpg);
+}
+
+  li {
+    margin-right: 10px;
+  }
+  
+  a {
+    color: #fff;
+    text-decoration: none;
+    padding-left: 20px;
+  }
+  
+  .signup a {
+    background-color: #9b231a;
+    padding: 8px 12px;
+    border-radius: 4px;
+    padding-left: 20px;
+  }
+  
+  .signin a {
+    background-color: #868026;
+    padding: 8px 12px;
+    border-radius: 4px;
+    padding-left: 20px;
+  }
+  
+  /* Modal styles */
+  .modalSignUp {
+    display: none; /* hide modal by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* transparent black overlay */
+    z-index: 9999;
+  }
+  .modalSignIn {
+    display: none; /* hide modal by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* transparent black overlay */
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family:MedievalSharp;
+  }
+  
+  .logoEspadas img {
+    width: 100px;
+    height: 50px;
+    float: left;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333333cb;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: 500;
+    font-family:MedievalSharp;
+    height: fit-content;
+  }
+  .menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .imgLogo {
+    position: relative;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .logo{
+  }
+  .modal input {
+    padding: 10px;
+  }
+  .modal-content label{
+    font-size: 25px;
+    font-weight: 500;
+  }

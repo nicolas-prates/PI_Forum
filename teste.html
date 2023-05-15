@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li><a href="#home" class="navbar-item">Home</a></li>
+        <li><a href="#news" class="navbar-item">News</a></li>
+        <li><a href="#contact" class="navbar-item">Contact</a></li>
+        <li><a href="#about" class="navbar-item">About</a></li>
+        <li>
+            <div class="modal" id="modal">
+              <form class="modal-content">
+                <h2>Formulário de Cadastro</h2>
+                <!-- Seus campos de formulário aqui -->
+              </form>
+            </div>
+            <a class="navbar-link" href="#">Cadastre-se</a>
+          </li>
+      </ul>
+    </nav>
+    <div style="padding:20px;margin-top:30px;background-color:#1abc9c;height:1500px;">
+      <h1>Fixed Top Navigation Bar</h1>
+      <h2>Scroll this page to see the effect</h2>
+      <h2>The navigation bar will stay at the top of the page while scrolling</h2>
+      
+      </div>
+  </body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const navbarLink = document.querySelector('.navbar-link');
+  const modal = document.getElementById('modal');
+
+  let timeoutId;
+
+  navbarLink.addEventListener('mouseenter', function () {
+    clearTimeout(timeoutId);
+    modal.style.display = 'block';
+    adjustModalPosition();
+  });
+
+  navbarLink.addEventListener('mouseleave', function () {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(function () {
+      modal.style.display = 'none';
+    }, 300);
+  });
+
+  modal.addEventListener('mouseenter', function () {
+    clearTimeout(timeoutId);
+  });
+
+  modal.addEventListener('mouseleave', function () {
+    timeoutId = setTimeout(function () {
+      modal.style.display = 'none';
+    }, 300);
+  });
+
+  function adjustModalPosition() {
+    const modalWidth = modal.offsetWidth;
+    const navbarLinkRect = navbarLink.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+
+    // Verifica se o modal ultrapassa o limite da tela à direita
+    if (navbarLinkRect.right + modalWidth > windowWidth) {
+      modal.style.right = '0';
+      modal.style.left = 'auto';
+    } else {
+      modal.style.right = 'auto';
+      modal.style.left = '0';
+    }
+  }
+});
+
+
+
+
+</script>

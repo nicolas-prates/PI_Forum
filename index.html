@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player's Retreat</title>
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <body>
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img src="./imagens/svgEspadas2.svg" alt="Logo da Empresa">
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li class="signup"><a href="#">Cadastre-se</a></li>
+        <li class="signin"><a href="#">Login</a></li>
+      </ul>
+    </nav>
+    
+    <section>
+      <div class="modalSignUp">
+        <div class="modal-content">
+          <h2>Cadastre-se</h2>
+          <form>
+            <label for="login">Login:</label><br>
+            <input type="text" id="login" name="login" required><br>
+      
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+      
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br>
+      
+            <label for="confirmar-senha">Confirmar Senha:</label><br>
+            <input type="password" id="confirmar-senha" name="confirmar-senha" required><br>
+            <input type="submit" value="Cadastrar">
+          </form>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="modalSignIn">
+        <div class="modal-content">
+          <h2>Logue</h2>
+          <form>
+            <label for="login">Login:</label><br>
+            <input type="text" id="login" name="login" required><br>
+
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br>
+      
+            <input type="submit" value="Logue">
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="imgLogo">
+      <div>
+        <img src="./imagens/Player'sRetreatcorrente (1)_adobe_express.png" class="logo" alt="">
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  $(document).ready(function () {
+    // sign in button click event
+    $(".signin a").click(function () {
+      $(".modalSignIn").fadeIn(); // display modal
+      return false; // prevent default behavior of link click
+    });
+
+    // sign up button click event
+    $(".signup a").click(function () {
+      $(".modalSignUp").fadeIn(); // display modal
+      return false; // prevent default behavior of link click
+    });
+
+    // close modal when clicking on overlay or close button
+    $(".modalSignUp, .modal-close").click(function () {
+      $(".modalSignUp").fadeOut(); // hide modal
+    });
+
+    $(".modalSignIn, .modal-close").click(function () {
+      $(".modalSignIn").fadeOut(); // hide modal
+    });
+
+    // prevent modal from closing when clicking on content
+    $(".modal-content").click(function (e) {
+      e.stopPropagation(); // prevent event from bubbling up
+    });
+  });
+</script>
