@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'MedievalSharp';
-  src: url(./MedievalSharp-Regular.ttf) format('truetype');
+  src: url(../imagens/MedievalSharp-Regular.ttf) format('truetype');
 }
 
 body {
-    background-image: url(./imagens/new-world-wallpaper1.jpg);
+    background-image: url(../imagens/papel1.avif);
+    background-size: cover;
 }
 
   li {
@@ -33,7 +34,7 @@ body {
   
   /* Modal styles */
   .modalSignUp {
-    display: none; /* hide modal by default */
+    display: none; /*hide modal by default */
     position: fixed;
     top: 0;
     left: 0;
@@ -55,16 +56,19 @@ body {
   
   .modal-content {
     position: absolute;
-    height: fit-content;
-    width: fit-content;
+    width: 250px;
+    height: 330px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: #ffffff00;
     padding: 40px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     font-family:MedievalSharp;
+    color: #fff;
+    font-weight: 400;
+    background-image: url(../imagens/escudo12.png);
+    background-size: cover;
   }
   
   .logoEspadas img {
@@ -83,6 +87,8 @@ body {
     font-weight: 500;
     font-family:MedievalSharp;
     height: fit-content;
+    background-image: url(../imagens/madeira3.jpg);
+    background-size: cover;
   }
   .menu {
     list-style-type: none;
@@ -99,8 +105,7 @@ body {
     display: flex;
     justify-content: center;
   }
-  .logo{
-  }
+
   .modal input {
     padding: 10px;
   }

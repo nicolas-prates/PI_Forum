@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player's Retreat</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./js/funcoes.js"></script>
+  <body>
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img src="../imagens/svgEspadas2.svg" alt="Logo da Empresa" />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li class="signup"><a href="#">Cadastre-se</a></li>
+        <li class="signin"><a href="#">Login</a></li>
+      </ul>
+    </nav>
+
+    <section>
+      <div class="modalSignUp">
+        <div class="modal-content">
+          <h2>Cadastre-se</h2>
+          <form>
+            <label for="login">Login:</label><br />
+            <input type="text" id="loginup" required /><br />
+
+            <label for="email">Email:</label><br />
+            <input type="email" id="email" required /><br />
+
+            <label for="senha">Senha:</label><br />
+            <input type="password" id="senhaup" required /><br />
+
+            <label for="confirmar-senha">Confirmar Senha:</label><br />
+            <input type="password" id="confirmar_senhaup" required /><br />
+            <input type="button" onclick="cadastrar()" value="Cadastrar" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="modalSignIn">
+        <div class="modal-content">
+          <h2>Logue</h2>
+          <form>
+            <label for="login">Login:</label><br />
+            <input type="text" id="login" name="login" required /><br />
+
+            <label for="senha">Senha:</label><br />
+            <input type="password" id="senhain" name="senha" required /><br />
+
+            <input type="submit" value="Logue" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="imgLogo">
+      <div>
+        <img
+          src="../imagens/Player'sRetreatcorrentec.png"
+          class="logo"
+          alt=""
+        />
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  $(document).ready(function () {
+    // sign in button click event
+    $(".signin a").click(function () {
+      $(".modalSignIn").fadeIn(); // display modal
+      return false; // prevent default behavior of link click
+    });
+
+    // sign up button click event
+    $(".signup a").click(function () {
+      $(".modalSignUp").fadeIn(); // display modal
+      return false; // prevent default behavior of link click
+    });
+
+    // close modal when clicking on overlay or close button
+    $(".modalSignUp, .modal-close").click(function () {
+      $(".modalSignUp").fadeOut(); // hide modal
+    });
+
+    $(".modalSignIn, .modal-close").click(function () {
+      $(".modalSignIn").fadeOut(); // hide modal
+    });
+
+    // prevent modal from closing when clicking on content
+    $(".modal-content").click(function (e) {
+      e.stopPropagation(); // prevent event from bubbling up
+    });
+  });
+</script>
+<script>
+  function cadastrar() {
+    // aguardar();
+    
+      //Recupere o valor da nova input pelo nome do id
+      // Agora vá para o método fetch logo abaixo
+      var nomeVar = loginup.value;
+      var emailVar = email.value;
+      var senhaVar = senhaup.value;
+      var confirmacaoSenhaVar = confirmar_senhaup.value;
+
+      if (
+        nomeVar == "" ||
+        emailVar == "" ||
+        senhaVar == "" ||
+        confirmacaoSenhaVar == ""
+      ) {
+        // cardErro.style.display = "block";
+        // mensagem_erro.innerHTML =
+        //   "(Mensagem de erro para todos os campos em branco)";
+        alert("preencha os campos")
+        // finalizarAguardar();
+        return false;
+       } // else {
+      //   setInterval(sumirMensagem, 5000);
+      // }
+
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            // cardErro.style.display = "block";
+            alert("cadastrado")
+            // limparFormulario();
+            // finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          // finalizarAguardar();
+        });
+
+      return false;
+    }
+
+    // function sumirMensagem() {
+    //   cardErro.style.display = "none";
+    // }
+  
+</script>
