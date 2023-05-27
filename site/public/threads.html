@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,24 @@
   <title>Threads Page</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="top-bar">
-    <h1 class="threadJogo">
-        Jogo
-    </h1>
-</div>
-<div class="main">
-    <div class="header">
-    </div>
-    <textarea></textarea>
-    <button>add comment</button>
-    <div class="comments">
-    </div>
-</div>
+  
+  <button onclick="buscarJogos()">buscar</button>
 </body>
+
 </html>
+<script>
+
+  function buscarJogos(){
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+  fetch(`/threads/buscar/${idUsuario}`).then(function (resposta) {
+    if (resposta.ok) {
+      if (resposta.status == 204) {
+        console.log("não tem jogos")
+      }
+    }
+  })}
+
+</script>
