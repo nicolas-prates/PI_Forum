@@ -5,12 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Threads Page</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
   </head>
 
   <body onload="buscarJogos()">
-    <a></a>
-    <div id="div_conteudo" class="listaJogos"></div>
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true" alt="Logo da Empresa" />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </nav>
+    <section class="section_conteudo">
+      <div class="div_titulo"><h1>Escolha a Thread</h1></div>
+      <div id="div_conteudo" class="listaJogos1"></div>
+    </section>
   </body>
 </html>
 <script>
@@ -22,26 +39,65 @@
         if (resposta.status == 204) {
           console.log("não tem jogos");
           window.location = "./jogos.html";
-          div_conteudo.innerHTMl = `
-        <a href="jogos.html">Clique aqui para escolher seus jogos</a>
-        `;
+          
         }
 
         resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
-          var tituloJogo = "";
-          var feed = document.getElementById("div_conteudo");
-          feed.innerHTML = "";
+
+          var tituloMetin2 = 0
+          var tituloMuOnline = 0
+          var tituloTera = 0
+          var tituloNewWorld = 0
+          var tituloAlbion = 0
           for (let i = 0; i < resposta.length; i++) {
             var jogo = resposta[i];
 
-            if (jogo.nomejogo != tituloJogo || i == 0) {
-              
-              div_conteudo.innerHTML += `<h1>${jogo.nomejogo}</h1><br>`
-              tituloJogo = jogo.nomejogo;
+            if(jogo.idjogo == 1){
+              if(tituloMetin2 == 0){
+                div_conteudo.innerHTML += 
+                `<div id="metin2" class="listaJogos"><h1>${jogo.nomejogo}</h1></div>`
+                  tituloMetin2 ++
+              }
+              metin2.innerHTML += 
+              `<a  href="./listaposts.html?idjogo=${jogo.idjogo}&idtopico=${jogo.idtopico}">${jogo.nometopico}</a><br>`
             }
-            
-            div_conteudo.innerHTML += `<a  href="./post.html?${jogo.idjogo}/?${jogo.idtopico}">${jogo.nometopico}</a><br>`
+            if(jogo.idjogo == 2){
+              if(tituloMuOnline == 0){
+                div_conteudo.innerHTML += 
+                `<div id="MuOnline" class="listaJogos"><h1>${jogo.nomejogo}</h1></div>`
+                  tituloMuOnline ++
+              }
+              MuOnline.innerHTML += 
+              `<a  href="./listaposts.html?idjogo=${jogo.idjogo}&idtopico=${jogo.idtopico}">${jogo.nometopico}</a><br>`
+            }
+            if(jogo.idjogo == 3){
+              if(tituloTera == 0){
+                div_conteudo.innerHTML += 
+                `<div id="Tera" class="listaJogos"><h1>${jogo.nomejogo}</h1></div>`
+                  tituloTera ++
+              }
+              Tera.innerHTML += 
+              `<a  href="./listaposts.html?idjogo=${jogo.idjogo}&idtopico=${jogo.idtopico}">${jogo.nometopico}</a><br>`
+            }
+            if(jogo.idjogo == 4){
+              if(tituloNewWorld == 0){
+                div_conteudo.innerHTML += 
+                `<div id="NewWorld" class="listaJogos"><h1>${jogo.nomejogo}</h1></div>`
+                  tituloNewWorld ++
+              }
+              NewWorld.innerHTML += 
+              `<a  href="./listaposts.html?idjogo=${jogo.idjogo}&idtopico=${jogo.idtopico}">${jogo.nometopico}</a><br>`
+            }
+            if(jogo.idjogo == 5){
+              if(tituloAlbion == 0){
+                div_conteudo.innerHTML += 
+                `<div id="Albion" class="listaJogos"><h1>${jogo.nomejogo}</h1></div>`
+                  tituloAlbion ++
+              }
+              Albion.innerHTML += 
+              `<a  href="./listaposts.html?idjogo=${jogo.idjogo}&idtopico=${jogo.idtopico}">${jogo.nometopico}</a><br>`
+            }
           }
         });
       }

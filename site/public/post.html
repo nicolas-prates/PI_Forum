@@ -1,37 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body onload="buscarPosts()">
-    <button onclick="buscarPosts()">buscar</button>
-</body>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+  </head>
+  <body onload="buscarPost(), buscarComentarios()">
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true" alt="Logo da Empresa" />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </nav>
+        <section class="section_conteudo">
+          <div class="container">
+            <div class="subforum">
+                
+                <div class="subforum-row">
+                    
+                    <div class="subforum-description subforum-column">
+                        <h4><span id="post_title"></span></h4>
+                        <p id="post_body"></p>
+                    </div>
+                    
+                    <div class="subforum-info subforum-column2">
+                        <b><span>postado</span></b> por <span id="post_usuario"></span> 
+                        <br>em <span id="post_data"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="comentarios"></div>
+            <div id="criar_comentario" class="criar_comentario">
+              <textarea id="commentBox" class="commentBox" cols="30" rows="10" maxlength="2000"></textarea>
+              <button onclick="criarComentario()" class="buttonClass">Comentar</button>
+            </div>
+          </div>
+        </section>
+  </body>
 </html>
 <script>
-    var idUsuario = sessionStorage.ID_USUARIO;
-    var idjogo = window.location.search[1]
-    var idtopico = window.location.search[4]
+  var idUsuario = sessionStorage.ID_USUARIO;
 
-    function buscarPosts(){
-        fetch(`/threads/listar/${idjogo}/${idtopico}/`).then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
-            } else {
-                throw ('Houve um erro na API!');
+  function buscarPost() {
+    const myKeyValues = window.location.search;
+    const urlParams = new URLSearchParams(myKeyValues);
+
+    var idpost = urlParams.get("idpost");
+
+    fetch("/threads/listarpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idpost: idpost,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            var feed = document.getElementById("feed_container");
+            var mensagem = document.createElement("span");
+            mensagem.innerHTML = "Nenhum resultado encontrado.";
+            feed.appendChild(mensagem);
+            throw "Nenhum resultado encontrado!!";
+          }
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+            for (let i = 0; i < resposta.length; i++) {
+              var post = resposta[i];
+
+                post_title.innerHTML += `${post.titulo}`
+                post_body.innerHTML += `${post.body}`
+                post_usuario.innerHTML += `${post.login}`
+                post_data.innerHTML += `${post.criado_em}`
             }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
-    }
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
 
-    
+  function buscarComentarios() {
+    const myKeyValues = window.location.search;
+    const urlParams = new URLSearchParams(myKeyValues);
+
+    var idpost = urlParams.get("idpost");
+    var comentario = commentBox.value;
+
+    fetch("/threads/listarcomentarios", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idpost: idpost,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            var feed = document.getElementById("feed_container");
+            var mensagem = document.createElement("span");
+            mensagem.innerHTML = "Nenhum resultado encontrado.";
+            feed.appendChild(mensagem);
+            throw "Nenhum resultado encontrado!!";
+          }
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+            for (let i = 0; i < resposta.length; i++) {
+                var comentario = resposta[i];
+
+              comentarios.innerHTML += 
+              `
+              <div class="subforum">
+                
+                <div class="subforum-row">
+                    
+                    <div class="subforum-description subforum-column">
+                        <p id="comentario_body">${comentario.body}</p>
+                    </div>
+                    
+                    <div class="subforum-info subforum-column2">
+                        <b><span>comentado</span></b> por <span id="comentario_usuario">${comentario.login}</span> 
+                        <br>em <span id="comentario_data">${comentario.criado_em}</span>
+                    </div>
+                </div>
+            </div>
+              `
+            }
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
+
+  function criarComentario() {
+    const myKeyValues = window.location.search;
+    const urlParams = new URLSearchParams(myKeyValues);
+
+    var idpost = urlParams.get("idpost");
+    var comentario = commentBox.value;
+
+    if (comentario == "") {
+      alert("preencha os campos");
+
+      return false;
+    }
+    fetch("/threads/criarcomentario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        comentario: comentario,
+        idUsuario: idUsuario,
+        idpost: idpost,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert("Postado");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
 </script>

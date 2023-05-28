@@ -7,6 +7,9 @@
     <title>Player's Retreat</title>
     <script src="./js/funcoes.js"></script>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
   </head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./js/funcoes.js"></script>
@@ -14,7 +17,7 @@
     <nav class="navbar">
       <div class="logoEspadas">
         <a href="#">
-          <img src="../imagens/svgEspadas2.svg" alt="Logo da Empresa" />
+          <img src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true" alt="Logo da Empresa" />
         </a>
       </div>
       <ul class="menu">
@@ -28,29 +31,28 @@
     <section>
       <div class="modalSignUp">
         <div class="modal-content">
-          <h2>Cadastre-se</h2>
-          <form>
-            <label for="login">Login:</label><br />
-            <input type="text" id="loginup" required /><br />
-
-            <label for="email">Email:</label><br />
-            <input type="email" id="email" required /><br />
-
-            <label for="senha">Senha:</label><br />
-            <input type="password" id="senhaup" required /><br />
-
-            <label for="confirmar-senha">Confirmar Senha:</label><br />
-            <input type="password" id="confirmar_senhaup" required /><br />
-            <input type="button" onclick="cadastrar()" value="Cadastrar" />
-          </form>
+          <div class="divForm">
+            <form>
+              <h2>Cadastre-se</h2>
+              <label for="login">Login:</label><br />
+              <input type="text" id="loginup" required /><br />
+              <label for="email">Email:</label><br />
+              <input type="email" id="email" required /><br />
+              <label for="senha">Senha:</label><br />
+              <input type="password" id="senhaup" required /><br />
+              <label for="confirmar-senha">Confirmar Senha:</label><br />
+              <input type="password" id="confirmar_senhaup" required /><br />
+              <input type="button" onclick="cadastrar()" value="Cadastrar" />
+            </form>
+          </div>
         </div>
       </div>
     </section>
     <section>
       <div class="modalSignIn">
         <div class="modal-content">
-          <h2>Logue</h2>
           <form>
+            <h2>Logue</h2>
             <label for="login">Login:</label><br />
             <input type="text" id="login" name="login" required /><br />
 
@@ -65,7 +67,7 @@
     <section class="imgLogo">
       <div>
         <img
-          src="../imagens/Player'sRetreatcorrentec.png"
+          src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/Player'sRetreatcorrentec.png?raw=true"
           class="logo"
           alt=""
         />

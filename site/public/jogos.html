@@ -5,32 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escolha seus jogos</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <input
-      onclick="capturarInputs()"
-      type="checkbox"
-      id="jogo1"
-      value="1"
-    />Metin2<br />
-    <input onclick="capturarInputs()" type="checkbox" id="jogo2" value="2" />Mu
-    Online<br />
-    <input
-      onclick="capturarInputs()"
-      type="checkbox"
-      id="jogo3"
-      value="3"
-    />Tera<br />
-    <input onclick="capturarInputs()" type="checkbox" id="jogo4" value="4" />New
-    World<br />
-    <input
-      onclick="capturarInputs()"
-      type="checkbox"
-      id="jogo5"
-      value="5"
-    />Albion Online<br />
-    <button onclick="inserirJogo()">cadastrar</button>
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img
+            src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true"
+            alt="Logo da Empresa"
+          />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </nav>
+    <div class="div_titulo1"><h1>Escolha seus Jogos</h1></div>
+    <section class="section_conteudo1">
+        <div>
+          <input
+            onclick="capturarInputs()"
+            type="checkbox"
+            id="jogo1"
+            value="1"
+          />Metin2
+        </div>
+        <div>
+          <input
+            onclick="capturarInputs()"
+            type="checkbox"
+            id="jogo2"
+            value="2"
+          />Mu Online
+        </div>
+        <div>
+          <input
+            onclick="capturarInputs()"
+            type="checkbox"
+            id="jogo3"
+            value="3"
+          />Tera
+        </div>
+        <div>
+          <input
+            onclick="capturarInputs()"
+            type="checkbox"
+            id="jogo4"
+            value="4"
+          />New World
+        </div>
+        <div>
+          <input
+            onclick="capturarInputs()"
+            type="checkbox"
+            id="jogo5"
+            value="5"
+          />Albion Online
+        </div>
+        <button onclick="inserirJogo()">cadastrar</button>
+    </section>
   </body>
 </html>
 <script>
@@ -78,7 +121,7 @@
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(listaJogosUser)
+        body: JSON.stringify(listaJogosUser),
       })
         .then(function (resposta) {
           console.log("resposta: ", resposta);

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body onload="buscarPosts()">
+    <nav class="navbar">
+      <div class="logoEspadas">
+        <a href="#">
+          <img
+            src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true"
+            alt="Logo da Empresa"
+          />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </nav>
+    <section id="section_conteudo" class="section_conteudo">
+      <div class="criar_post_titulo">
+        <label for="post_title">Titulo do post:</label>
+        <input type="text" id="post_title" /><br />
+      </div>
+      <div class="criar_post_corpo">
+        <label for="post_body">Corpo do post:</label>
+        <textarea class="commentBox" id="post_body" maxlength="2000"></textarea>
+        <button onclick="criarPost()">Add post</button>
+      </div>
+    </section>
+      <section id="section_conteudo" class="section_conteudo">
+        <div id="mostrar_posts" class="mostrar_posts"></div>
+      </section>
+  </body>
+</html>
+<script>
+  var idUsuario = sessionStorage.ID_USUARIO;
+  const myKeyValues = window.location.search;
+  const urlParams = new URLSearchParams(myKeyValues);
+
+  var idjogo = urlParams.get("idjogo");
+  var idtopico = urlParams.get("idtopico");
+
+  function buscarPosts() {
+    mostrar_posts.innerHTML = ""
+    fetch("/threads/listarposts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idjogo: idjogo,
+        idtopico: idtopico,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            var feed = document.getElementById("feed_container");
+            var mensagem = document.createElement("span");
+            mensagem.innerHTML = "Nenhum resultado encontrado.";
+            feed.appendChild(mensagem);
+            throw "Nenhum resultado encontrado!!";
+          }
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+            for (let i = 0; i < resposta.length; i++) {
+              var post = resposta[i];
+
+              mostrar_posts.innerHTML += `
+              
+            <div class="subforum">
+                
+                <div class="subforum-row">
+                    
+                    <div class="subforum-description subforum-column">
+                        <h4><a href="post.html?idpost=${post.id}">${post.titulo}</a></h4>
+                        <p id="post_corpo">${post.body}</p>
+                    </div>
+                    
+                    <div class="subforum-info subforum-column2">
+                        <b><span>postado</span></b> por <span id="post_usuario">${post.login}</span> 
+                        <br>em <span id="post_data">${post.criado_em}</span>
+                    </div>
+                </div>
+            </div>
+          
+              `;
+            }
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
+
+  function criarPost() {
+    var postTitle = post_title.value;
+    var postBody = post_body.value;
+    console.log(postBody)
+
+    if (postTitle == "" || postBody == "") {
+      alert("preencha os campos");
+
+      return false;
+    }
+    fetch("/threads/criarpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postTitle: postTitle,
+        postBody: postBody,
+        idjogo: idjogo,
+        idtopico: idtopico,
+        idUsuario: idUsuario,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert("Postado");
+          setTimeout(buscarPosts(), 1000)
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+</script>
