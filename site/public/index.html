@@ -204,9 +204,9 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
+                    sessionStorage.setItem('ID_USUARIO', json.id)
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.LOGIN_USUARIO = json.login;
-                    sessionStorage.ID_USUARIO = json.idusuario;
 
                     setTimeout(function () {
                         window.location = "./threads.html";

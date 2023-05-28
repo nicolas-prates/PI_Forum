@@ -1,52 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escolha seus jogos</title>
-</head>
+  </head>
 
-<body>
-    <input onclick="capturarInputs()" type="checkbox" id="jogo1" value="Metin2">Metin2<br>
-    <input onclick="capturarInputs()" type="checkbox" id="jogo2" value="Mu Online">Mu Online<br>
-    <input onclick="capturarInputs()" type="checkbox" id="jogo3" value="Tera">Tera<br>
-    <input onclick="capturarInputs()" type="checkbox" id="jogo4" value="New World">New World<br>
-    <input onclick="capturarInputs()" type="checkbox" id="jogo5" value="Albion Online">Albion Online<br>
-</body>
-
+  <body>
+    <input
+      onclick="capturarInputs()"
+      type="checkbox"
+      id="jogo1"
+      value="1"
+    />Metin2<br />
+    <input onclick="capturarInputs()" type="checkbox" id="jogo2" value="2" />Mu
+    Online<br />
+    <input
+      onclick="capturarInputs()"
+      type="checkbox"
+      id="jogo3"
+      value="3"
+    />Tera<br />
+    <input onclick="capturarInputs()" type="checkbox" id="jogo4" value="4" />New
+    World<br />
+    <input
+      onclick="capturarInputs()"
+      type="checkbox"
+      id="jogo5"
+      value="5"
+    />Albion Online<br />
+    <button onclick="inserirJogo()">cadastrar</button>
+  </body>
 </html>
 <script>
-    function capturarInputs() {
-        var listaJogos = [
-            iptjogo1 = {
-                nome: jogo1.value,
-                escolhido: jogo1.checked
-            },
-            iptjogo2 = {
-                nome: jogo2.value,
-                escolhido: jogo2.checked
-            },
-            iptjogo3 = {
-                nome: jogo3.value,
-                escolhido: jogo3.checked
-            },
-            iptjogo4 = {
-                nome: jogo4.value,
-                escolhido: jogo4.checked
-            },
-            iptjogo5 = {
-                nome: jogo5.value,
-                escolhido: jogo5.checked
-            }
-        ]
-        var listaJogosUser = []
-        listaJogos.forEach(jogo => {
-            if(jogo.escolhido){
-                listaJogosUser.push(jogo.nome)
-            }
+  var listaJogosUser = [];
+  function capturarInputs() {
+    var listaJogos = [
+      (iptjogo1 = {
+        nome: jogo1.value,
+        escolhido: jogo1.checked,
+      }),
+      (iptjogo2 = {
+        nome: jogo2.value,
+        escolhido: jogo2.checked,
+      }),
+      (iptjogo3 = {
+        nome: jogo3.value,
+        escolhido: jogo3.checked,
+      }),
+      (iptjogo4 = {
+        nome: jogo4.value,
+        escolhido: jogo4.checked,
+      }),
+      (iptjogo5 = {
+        nome: jogo5.value,
+        escolhido: jogo5.checked,
+      }),
+    ];
+    listaJogosUser = [];
+    listaJogos.forEach((jogo) => {
+      if (jogo.escolhido) {
+        listaJogosUser.push(jogo.nome);
+      }
+    });
+    console.log(listaJogosUser);
+  }
+
+  function inserirJogo() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    if (listaJogosUser.length == 0) {
+      alert("escolha pelo menos 1 jogo");
+    } else {
+      fetch(`/jogos/cadastrarjogo/${idUsuario}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(listaJogosUser)
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            alert("jogos cadastrado");
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
         });
-        console.log(listaJogosUser)
+
+      return false;
     }
+  }
 </script>

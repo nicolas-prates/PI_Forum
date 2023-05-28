@@ -113,3 +113,7 @@ body {
     font-size: 25px;
     font-weight: 500;
   }
+
+  .listaJogos a{
+    color: #000;
+  }

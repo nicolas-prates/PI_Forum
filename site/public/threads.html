@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Threads Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Threads Page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  
-  <button onclick="buscarJogos()">buscar</button>
-</body>
-
+  <body onload="buscarJogos()">
+    <a></a>
+    <div id="div_conteudo" class="listaJogos"></div>
+  </body>
 </html>
 <script>
-
-  function buscarJogos(){
+  function buscarJogos() {
     var idUsuario = sessionStorage.ID_USUARIO;
 
-  fetch(`/threads/buscar/${idUsuario}`).then(function (resposta) {
-    if (resposta.ok) {
-      if (resposta.status == 204) {
-        console.log("não tem jogos")
-      }
-    }
-  })}
+    fetch(`/threads/buscar/${idUsuario}`).then(function (resposta) {
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          console.log("não tem jogos");
+          window.location = "./jogos.html";
+          div_conteudo.innerHTMl = `
+        <a href="jogos.html">Clique aqui para escolher seus jogos</a>
+        `;
+        }
 
+        resposta.json().then(function (resposta) {
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+          var tituloJogo = "";
+          var feed = document.getElementById("div_conteudo");
+          feed.innerHTML = "";
+          for (let i = 0; i < resposta.length; i++) {
+            var jogo = resposta[i];
+
+            if (jogo.nomejogo != tituloJogo || i == 0) {
+              
+              div_conteudo.innerHTML += `<h1>${jogo.nomejogo}</h1><br>`
+              tituloJogo = jogo.nomejogo;
+            }
+            
+            div_conteudo.innerHTML += `<a  href="./post.html?${jogo.idjogo}/?${jogo.idtopico}">${jogo.nometopico}</a><br>`
+          }
+        });
+      }
+    });
+  }
 </script>
