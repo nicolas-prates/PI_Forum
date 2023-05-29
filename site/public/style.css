@@ -217,6 +217,10 @@ body {
     top: 65px;
   }
 
+  .post_identity{
+    padding: 10px;
+  }
+
   .criar_post_titulo{
     display: flex;
     justify-content: space-around;
@@ -239,6 +243,12 @@ body {
     border-radius: 20px;
     height: 30px;
     width: 300px;
+  }
+
+  .post_corpo {
+    width: 500px;
+  word-wrap: break-word;
+  text-align: center;
   }
 
   .criar_post_corpo{
@@ -274,10 +284,16 @@ body {
 
 .mostrar_posts {
   top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.mostrarcomentarios {
-  width: fit-content;
+.comentario_body {
+  width: 500px;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .container{
@@ -302,7 +318,9 @@ body {
 
 .subforum-row{
   display: grid;
+  width: 800px;
   grid-template-columns: 80% 20%;
+  word-wrap: ;
 }
 
 .subforum-column{
@@ -334,6 +352,7 @@ body {
 .criar_comentario {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 .commentBox {
   height: 65px;

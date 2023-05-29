@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Player's Retreat</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,8 +30,8 @@
                 <div class="subforum-row">
                     
                     <div class="subforum-description subforum-column">
-                        <h4><span id="post_title"></span></h4>
-                        <p id="post_body"></p>
+                        <h4><span id="post_title" class="post_identity"></span></h4>
+                        <p id="post_body" class="post_identity"></p>
                     </div>
                     
                     <div class="subforum-info subforum-column2">
@@ -135,7 +135,7 @@
                 <div class="subforum-row">
                     
                     <div class="subforum-description subforum-column">
-                        <p id="comentario_body">${comentario.body}</p>
+                        <p id="comentario_body" class="comentario_body">${comentario.body}</p>
                     </div>
                     
                     <div class="subforum-info subforum-column2">
@@ -183,7 +183,8 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          alert("Postado");
+          console.log("Postado");
+          setTimeout(buscarComentarios(), 1000)
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }

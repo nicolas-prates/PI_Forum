@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Player's Retreat</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -88,7 +88,7 @@
                     
                     <div class="subforum-description subforum-column">
                         <h4><a href="post.html?idpost=${post.id}">${post.titulo}</a></h4>
-                        <p id="post_corpo">${post.body}</p>
+                        <p id="post_corpo" class="post_corpo">${post.body}</p>
                     </div>
                     
                     <div class="subforum-info subforum-column2">
@@ -137,7 +137,6 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          alert("Postado");
           setTimeout(buscarPosts(), 1000)
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";

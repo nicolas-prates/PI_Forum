@@ -42,7 +42,7 @@ CREATE TABLE  posts (
   CONSTRAINT fk_posts_usuario1 FOREIGN KEY (fkUsuario) REFERENCES playersretreat.usuario (id));
 
 CREATE TABLE  comentarios (
-  id INT NOT NULL,
+  id INT NOT NULL auto_increment,
   body TEXT NOT NULL,
   criado_em DATETIME NULL DEFAULT NULL,
   fkPosts INT NOT NULL,
