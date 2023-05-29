@@ -212,7 +212,7 @@ body {
     position: relative;
     left: 10%;
     width: 80%;
-    height: 800px;
+    height: fit-content;
     background-color: #000000b9;
     top: 65px;
   }
@@ -272,7 +272,9 @@ body {
   width: 100%;
 }
 
-
+.mostrar_posts {
+  top: 40px;
+}
 
 .mostrarcomentarios {
   width: fit-content;
@@ -292,7 +294,7 @@ body {
 }
 
 .subforum-title{
-  background-color:#292B2E;
+  background-color:#000000b9;
   padding: 5px;
   border-radius: 5px;
   margin:4px;
@@ -311,7 +313,7 @@ body {
   padding: 10px;
   margin:4px;
   border-radius: 5px;
-  background-color:#11131498;
+  background-color:#000000b9;
 }
 
 .subforum-column h4{
@@ -322,7 +324,7 @@ body {
   padding: 10px;
   margin:4px;
   border-radius: 5px;
-  background-color:#11131498;
+  background-color:#000000b9;
 }
 
 .subforum-description *{
@@ -404,12 +406,21 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    left: 10%;
-    width: 80%;
+    left: 25%;
+    width: 50%;
     height: 800px;
     background-color: #000000b9;
 }
 
-/* .listaEscolherJogos1{
+.div_jogo {
+  width: 400px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-} */
+.section_conteudo2 {
+  position: relative;
+  top: 50px;
+}

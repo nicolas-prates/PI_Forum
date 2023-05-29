@@ -32,45 +32,45 @@
     </nav>
     <div class="div_titulo1"><h1>Escolha seus Jogos</h1></div>
     <section class="section_conteudo1">
-        <div>
+        <div id="div_jogo">
           <input
             onclick="capturarInputs()"
             type="checkbox"
             id="jogo1"
             value="1"
-          />Metin2
+          />Metin2 <img style="height: 100px;" src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/iconmetin2.png?raw=true" alt="">
         </div>
-        <div>
+        <div id="div_jogo">
           <input
             onclick="capturarInputs()"
             type="checkbox"
             id="jogo2"
             value="2"
-          />Mu Online
+          />Mu Online <img style="height: 100px;" src="https://raw.githubusercontent.com/nicolas-prates/PI_Forum/main/site/imagens/iconmu.ico" alt="">
         </div>
-        <div>
+        <div id="div_jogo">
           <input
             onclick="capturarInputs()"
             type="checkbox"
             id="jogo3"
             value="3"
-          />Tera
+          />Tera <img style="height: 100px;" src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/teraicon.png?raw=true" alt="">
         </div>
-        <div>
+        <div id="div_jogo">
           <input
             onclick="capturarInputs()"
             type="checkbox"
             id="jogo4"
             value="4"
-          />New World
+          />New World <img style="height: 100px;" src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/newworldicon.png?raw=true" alt="">
         </div>
-        <div>
+        <div id="div_jogo">
           <input
             onclick="capturarInputs()"
             type="checkbox"
             id="jogo5"
             value="5"
-          />Albion Online
+          />Albion Online <img style="height: 100px;" src="https://raw.githubusercontent.com/nicolas-prates/PI_Forum/main/site/imagens/albionicon.webp" alt="">
         </div>
         <button onclick="inserirJogo()">cadastrar</button>
     </section>
@@ -128,6 +128,7 @@
 
           if (resposta.ok) {
             alert("jogos cadastrado");
+            window.location = "./threads.html"
           } else {
             throw "Houve um erro ao tentar realizar o cadastro!";
           }
