@@ -320,7 +320,6 @@ body {
   display: grid;
   width: 800px;
   grid-template-columns: 80% 20%;
-  word-wrap: ;
 }
 
 .subforum-column{
@@ -442,4 +441,18 @@ body {
 .section_conteudo2 {
   position: relative;
   top: 50px;
+}
+
+.container_charts{
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 10%;
+  top: 60px;
+}
+
+.divs_charts {
+  height: 600px;
 }

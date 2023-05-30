@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Player's Retreat</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,55 +12,200 @@
       href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
       rel="stylesheet"
     />
-</head>
-<body onload="buscarDados()">
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <body onload="buscarDados()">
     <nav class="navbar">
-        <div class="logoEspadas">
-          <a href="#">
-            <img src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true" alt="Logo da Empresa" />
-          </a>
-        </div>
-        <ul class="menu">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Analytics</a></li>
-        </ul>
-      </nav>
-
-    
-</body>
+      <div class="logoEspadas">
+        <a href="#">
+          <img
+            src="https://github.com/nicolas-prates/PI_Forum/blob/main/site/imagens/svgEspadas2.svg?raw=true"
+            alt="Logo da Empresa"
+          />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </nav>
+    <section class="container_charts">
+      <div class="divs_charts" style="position: relative; width: 60%">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="divs_charts" style="position: relative; width: 60%">
+        <canvas id="myChart2"></canvas>
+      </div>
+      <div class="divs_charts" style="position: relative; width: 60%">
+        <canvas id="myChart3"></canvas>
+      </div>
+    </section>
+  </body>
 </html>
 <script>
-    
-var data = []
-var labels = []
+  var contagem = [];
+  var contagem2 = [];
+  var contagem3 = [];
 
-function buscarDados(){
-    fetch(`/jogos/buscar`).then(function (resposta) {
-      if (resposta.ok) {
-        if (resposta.status == 204) {
-          console.log("não tem jogos");          
-        }
-        resposta.json().then(function (resposta) {
-          console.log("Dados recebidos: ", JSON.stringify(resposta));
-            resposta.forEach(jogo => {
-                data.push(jogo.contagem)
-                labels.push(jogo.nome)
+  function buscarDados() {
+    fetch("/jogos/buscar")
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            alert("Nenhum resultado encontrado!!");
+          }
+
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+            resposta.forEach((jogo) => {
+              contagem.push({ dado: jogo.contagem, nome: jogo.nome });
             });
-        });
-      }
-    });
-    const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-};
+            const ctx = document.getElementById("myChart");
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: contagem.map((row) => row.nome),
+                datasets: [
+                  {
+                    label: "Contagem de escolha dos jogos",
+                    data: contagem.map((row) => row.dado),
+                    borderWidth: 1,
+                    backgroundColor: ["#2e0ee2bd"],
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 35,
+                      },
+                    },
+                  },
+                },
+                
+              },
+            });
+            setTimeout(buscar2(), 1000);
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
 
-}
+  function buscar2() {
+    fetch("/jogos/buscar2")
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            alert("Nenhum resultado encontrado!!");
+          }
+
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+            for (var i = resposta.length - 1; i > 0; i--) {
+              var posts = resposta[i];
+              contagem2.push({ dado: posts.inserts, nome: posts.data });
+            }
+
+            const ctx2 = document.getElementById("myChart2");
+            new Chart(ctx2, {
+              type: "line",
+              data: {
+                labels: contagem2.map((row) => row.nome),
+                datasets: [
+                  {
+                    label: "Contagem de posts no forum durante a semana",
+                    data: contagem2.map((row) => row.dado),
+                    borderWidth: 1,
+                    backgroundColor: ["#ff0037b9"],
+                    borderColor: "#ff0037b9",
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 35,
+                      },
+                    },
+                  },
+                },
+                
+              },
+            });
+            setTimeout(buscar3(), 1000);
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
+
+  function buscar3() {
+    fetch("/jogos/buscar3")
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            alert("Nenhum resultado encontrado!!");
+          }
+
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+            resposta.forEach((posts) => {
+              contagem3.push({ dado: posts.contagem, nome: posts.nome });
+            });
+            const ctx3 = document.getElementById("myChart3");
+            new Chart(ctx3, {
+              type: "bar",
+              data: {
+                labels: contagem3.map((row) => row.nome),
+                datasets: [
+                  {
+                    label: "Contagem de posts em cada jogo",
+                    data: contagem3.map((row) => row.dado),
+                    borderWidth: 1,
+                    backgroundColor: "#dd4c08b9",
+                    borderColor: "#dd4c08b9",
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 35,
+                      },
+                    },
+                  },
+                },
+                
+              },
+            });
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
 </script>

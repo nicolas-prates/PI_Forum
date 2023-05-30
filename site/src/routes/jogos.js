@@ -7,8 +7,17 @@ router.post("/cadastrarjogo/:idUsuario", function (req, res) {
     jogosController.cadastrarjogo(req, res);
 });
 
-router.post("/buscar/", function (req, res) {
+router.get("/buscar", function (req, res) {
     jogosController.buscar(req, res);
 });
+
+router.get("/buscar2", function (req, res) {
+    jogosController.buscar2(req, res);
+});
+
+router.get("/buscar3", function (req, res) {
+    jogosController.buscar3(req, res);
+});
+
 
 module.exports = router
