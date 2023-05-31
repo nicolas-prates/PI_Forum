@@ -19,14 +19,14 @@ body {
   }
   
   .signup a {
-    background-color: #9b231a;
+    background-color: #571915;
     padding: 8px 12px;
     border-radius: 4px;
     padding-left: 20px;
   }
   
   .signin a {
-    background-color: #868026;
+    background-color: #136529;
     padding: 8px 12px;
     border-radius: 4px;
     padding-left: 20px;
@@ -118,6 +118,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #fff;
   }
   .imgLogo {
     position: relative;
@@ -455,4 +456,25 @@ body {
 
 .divs_charts {
   height: 600px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  background-color: #000000b9;
+  z-index: 1;
+  right: 5%;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

@@ -13,8 +13,8 @@
       rel="stylesheet"
     />
   </head>
-
-  <body>
+  <script src="script.js"></script>
+  <body onload="validarSessao()">
     <nav class="navbar">
       <div class="logoEspadas">
         <a href="#">
@@ -25,9 +25,12 @@
         </a>
       </div>
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Analytics</a></li>
+        <li><a href="./threads.html">Home</a></li>
+        <li><a href="./analytics.html">Analytics</a></li>
+        <ul class="dropdown">
+          Olá <span id="span_login"></span>
+          <li class="dropdown-content" onclick="finalizarSessao()">Log out</li>
+        </ul>
       </ul>
     </nav>
     <div class="div_titulo1"><h1>Escolha seus Jogos</h1></div>
@@ -127,7 +130,6 @@
           console.log("resposta: ", resposta);
 
           if (resposta.ok) {
-            alert("jogos cadastrado");
             window.location = "./threads.html"
           } else {
             throw "Houve um erro ao tentar realizar o cadastro!";

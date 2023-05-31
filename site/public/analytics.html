@@ -14,7 +14,8 @@
     />
   </head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <body onload="buscarDados()">
+  <script src="script.js"></script>
+  <body onload="buscarDados(), validarSessao()">
     <nav class="navbar">
       <div class="logoEspadas">
         <a href="#">
@@ -25,9 +26,12 @@
         </a>
       </div>
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="./threads.html">Home</a></li>
         <li><a href="#">Analytics</a></li>
+        <ul class="dropdown">
+          Olá <span id="span_login"></span>
+          <li class="dropdown-content" onclick="finalizarSessao()">Log out</li>
+        </ul>
       </ul>
     </nav>
     <section class="container_charts">
@@ -111,8 +115,8 @@
           resposta.json().then(function (resposta) {
             console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-            for (var i = resposta.length - 1; i > 0; i--) {
-              var posts = resposta[i];
+            for (var i = resposta.length; i > 0; i--) {
+              var posts = resposta[i-1];
               contagem2.push({ dado: posts.inserts, nome: posts.data });
             }
 

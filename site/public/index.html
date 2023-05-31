@@ -22,7 +22,7 @@
       </div>
       <ul class="menu">
         <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="./analytics.html">Analytics</a></li>
         <li class="signup"><a href="#">Cadastre-se</a></li>
         <li class="signin"><a href="#">Login</a></li>
       </ul>
@@ -150,7 +150,7 @@
 
           if (resposta.ok) {
             // cardErro.style.display = "block";
-            alert("cadastrado")
+            $(".modalSignUp").fadeOut()
             // limparFormulario();
             // finalizarAguardar();
           } else {

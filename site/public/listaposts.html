@@ -13,7 +13,8 @@
       rel="stylesheet"
     />
   </head>
-  <body onload="buscarPosts()">
+  <script src="script.js"></script>
+  <body onload="buscarPosts(), validarSessao()">
     <nav class="navbar">
       <div class="logoEspadas">
         <a href="#">
@@ -24,9 +25,12 @@
         </a>
       </div>
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Analytics</a></li>
+        <li><a href="./threads.html">Home</a></li>
+        <li><a href="./analytics.html">Analytics</a></li>
+        <ul class="dropdown">
+          Olá <span id="span_login"></span>
+          <li class="dropdown-content" onclick="finalizarSessao()">Log out</li>
+        </ul>
       </ul>
     </nav>
     <section id="section_conteudo1" class="section_conteudo">

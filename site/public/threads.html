@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
   </head>
-
-  <body onload="buscarJogos()">
+  <script src="script.js"></script>
+  <body onload="buscarJogos(), validarSessao()">
     <nav class="navbar">
       <div class="logoEspadas">
         <a href="#">
@@ -20,8 +20,11 @@
       </div>
       <ul class="menu">
         <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Analytics</a></li>
+        <li><a href="./analytics.html">Analytics</a></li>
+        <ul class="dropdown">
+          Olá <span id="span_login"></span>
+          <li class="dropdown-content" onclick="finalizarSessao()">Log out</li>
+        </ul>
       </ul>
     </nav>
     <div class="div_titulo1"><h1>Escolha a Thread</h1></div>
