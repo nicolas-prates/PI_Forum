@@ -36,16 +36,10 @@ function buscar() {
     );
     var instrucao = 
     `
-    SELECT date_format(str_to_date(d.data, '%Y-%m-%d %H:%i:%s'), '%b %d %Y') as data, COUNT(p.id) AS inserts
-    FROM (
-      SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY AS data
-      FROM (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6) AS a
-      CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6) AS b
-      CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6) AS c
-    ) d
-    LEFT JOIN posts p ON DATE(p.criado_em) = d.data
-    WHERE d.data >= CURDATE() - INTERVAL 6 DAY
-    GROUP BY d.data;
+    SELECT  date_format(str_to_date(criado_em, '%Y-%m-%d %H:%i:%s'), '%b %d %Y') as data, count(id) as inserts
+    FROM posts
+    WHERE 
+      date(criado_em) BETWEEN CURRENT_DATE()-7 AND CURRENT_DATE()+1 group by data order by data desc;
 
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
